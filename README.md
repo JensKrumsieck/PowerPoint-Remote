@@ -4,7 +4,7 @@
 
 A simple WPF/Web based Remote for Powerpoint.
 
-<img src="https://raw.githubusercontent.com/JensKrumsieck/PowerPoint-Remote/master/.github/screenshot.png" alt="PPTRemote" width="500px"/>
+<img src="https://raw.githubusercontent.com/JensKrumsieck/PowerPoint-Remote/master/.github/screenshot.png" alt="PPTRemote" width="250px"/>
 
 Open a PPT File to start the Server and use the QR Code to navigate your webbrowser to the internal server. You will see a preview of the current slide and next/previous buttons to navigate through the presentation.
 
