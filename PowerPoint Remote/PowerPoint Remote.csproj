@@ -1,9 +1,25 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
+	  <PackageId>PowerPoint Remote</PackageId>
+	  <Authors>Jens Krumsieck</Authors>
+	  <Company>Jens Krumsieck</Company>
+	  <Version>1.0.0</Version>
     <OutputType>WinExe</OutputType>
     <TargetFramework>net5.0-windows</TargetFramework>
+	  <LangVersion>9.0</LangVersion>
     <RootNamespace>PowerPoint_Remote</RootNamespace>
+	  <PackageProjectUrl>https://github.com/JensKrumsieck/PowerPoint-Remote</PackageProjectUrl>
+	  <RepositoryUrl>https://github.com/JensKrumsieck/PowerPoint-Remote</RepositoryUrl>
+	  <RepositoryType>git</RepositoryType>
+	  <IncludeAllContentForSelfExtract>True</IncludeAllContentForSelfExtract>
+	  <PublishSingleFile>True</PublishSingleFile>
+	  <SelfContained>True</SelfContained>
+	  <PublishReadyToRun>True</PublishReadyToRun>
+	  <RuntimeIdentifier>win-x64</RuntimeIdentifier>
+	  <PublishReadyToRunShowWarnings>True</PublishReadyToRunShowWarnings>
+	  <ApplicationIcon>Resources\pptr.ico</ApplicationIcon>
+	  <PackageIcon>Resources\pptr.ico</PackageIcon>
     <UseWPF>true</UseWPF>
   </PropertyGroup>
 
@@ -11,6 +27,16 @@
 	  <None Include="wwwroot\**">
             <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 	  </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="Resources\pptr.ico" />
+    <None Remove="Resources\PPTRemote.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Resources\pptr.ico" />
+    <Resource Include="Resources\PPTRemote.png" />
   </ItemGroup>
 
   <ItemGroup>
