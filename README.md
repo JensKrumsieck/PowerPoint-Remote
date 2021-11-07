@@ -2,7 +2,7 @@
 
 # PowerPoint-Remote
 
-A simple WPF/Web based Remote for Powerpoint.
+**A simple WPF/Web based Remote for Powerpoint.**
 
 <img src="https://raw.githubusercontent.com/JensKrumsieck/PowerPoint-Remote/master/.github/screenshot.png" alt="PPTRemote" width="250px"/>
 
