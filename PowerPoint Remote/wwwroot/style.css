@@ -1,0 +1,29 @@
+﻿* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    transition: background-image 1s ease-in-out;
+}
+
+#main {
+    height: 100vh;
+    width: 100%;
+}
+
+#controls{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+
+button {
+    height: 100vh;
+    font-size: 3rem;
+    font-weight: bold;
+    color: #7FCD91;
+    background: transparent;
+    border: none;
+}

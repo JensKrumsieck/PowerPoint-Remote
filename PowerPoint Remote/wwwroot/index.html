@@ -1,0 +1,55 @@
+﻿<!DOCTYPE html>
+
+<html lang="en">
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>PowerPoint Remote Control</title>
+	<link href="style.css" rel="stylesheet"/>
+</head>
+<body>
+	<script src="swiped-events.min.js"></script>
+	<script>
+		function httpGet(url) {
+			fetch(url, {
+				headers: {
+					'Content-Type': 'application/json; charset=UTF-8'
+				},
+				method: 'GET'
+			}).then(response => response.text())
+				.catch(e => null)
+		}
+
+		function nextPage() {
+			httpGet('/next');
+		}
+
+		function previousPage() {
+			httpGet('/previous')
+		}
+
+		function preview() {
+			var ts = new Date().getTime();
+			document.body.style.backgroundImage = 'url(preview.jpg?t=' + ts + ')';
+			document.body.style.backgroundRepeat = "no-repeat";
+			document.body.style.backgroundSize = 'contain';
+			document.body.style.backgroundPosition = 'center center';
+		}
+		document.addEventListener('swiped-left', function (e) {
+			nextPage();
+		})
+		document.addEventListener('swiped-right', function (e) {
+			previousPage();
+		})
+
+		setInterval(preview, 1000);
+
+	</script>
+	<div id="main">
+		<div id="controls">
+			<button onclick="previousPage();">Previous</button>
+			<button onclick="nextPage();">Next</button>
+		</div>
+	</div>
+</body>
+</html>

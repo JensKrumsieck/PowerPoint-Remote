@@ -1,0 +1,31 @@
+﻿<commons:DefaultWindow x:Class="PowerPoint_Remote.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"                       
+        xmlns:commons="clr-namespace:ThemeCommons.Controls;assembly=ThemeCommons"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        TitlebarHeight="35"
+        TitlebarBackground="{DynamicResource TitleBar}" 
+        Title="PowerPoint Remote" Height="450" Width="450">
+    <commons:DefaultWindow.TitlebarContent>
+        <Grid HorizontalAlignment="Left">
+            <TextBlock FontSize="14" VerticalAlignment="Center">
+                PowerPoint Remote
+            </TextBlock>
+        </Grid>
+    </commons:DefaultWindow.TitlebarContent>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="70" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <UniformGrid Grid.Row="0" Columns="1" Rows="2" HorizontalAlignment="Left" Margin="10 10">
+            <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Margin="0">
+                <TextBlock Grid.Row="1" VerticalAlignment="Center">Presentation:</TextBlock>
+                <Button Click="Button_Click" Background="{DynamicResource Dark}" Foreground="{DynamicResource Light}"  Margin="10 0">Open File</Button>
+            </StackPanel>
+            <TextBlock x:Name="PPTPath" FontSize="10"/>
+        </UniformGrid>
+        <Image x:Name="QrImg" Grid.Row="1"/>
+    </Grid>
+</commons:DefaultWindow>
