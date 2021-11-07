@@ -1,9 +1,10 @@
 ﻿using Microsoft.Win32;
 using SkiaSharp.QrCode.Image;
+using System.Diagnostics;
 using System.IO;
-using System.Timers;
 using System.Windows;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using ThemeCommons.Controls;
 
 namespace PowerPoint_Remote
@@ -11,16 +12,11 @@ namespace PowerPoint_Remote
     public partial class MainWindow : DefaultWindow
     {
         private Server server;
-        private Timer timer;
         public MainWindow()
         {
             InitializeComponent();
             server = new Server();
-            Closing += (s, e) =>
-            {
-                timer.Stop();
-                server.Dispose();
-            };
+            Closing += (s, e) => server.Dispose();
         }
 
         private void BuildQrCode()
@@ -42,17 +38,9 @@ namespace PowerPoint_Remote
             server.OpenPresentation(PPTPath.Text);
             BuildQrCode();
             Activate();
-            StartSlideShowTimer();
         }
 
-        private void StartSlideShowTimer()
-        {
-            timer = new Timer(500)
-            {
-                AutoReset = true,
-                Enabled = true
-            };
-            timer.Elapsed += ScreenCaptureUtil.CaptureSlideShow;
-        }
+        private void Hyperlink_RequestNavigate(object sender, RequestNavigateEventArgs e) =>
+            Process.Start(new ProcessStartInfo(e.Uri.AbsoluteUri) { UseShellExecute = true });
     }
 }

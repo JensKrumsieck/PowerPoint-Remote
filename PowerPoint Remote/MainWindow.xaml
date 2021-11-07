@@ -18,6 +18,7 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="70" />
             <RowDefinition Height="*" />
+            <RowDefinition Height="12" />
         </Grid.RowDefinitions>
         <UniformGrid Grid.Row="0" Columns="1" Rows="2" HorizontalAlignment="Left" Margin="10 10">
             <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Margin="0">
@@ -27,5 +28,8 @@
             <TextBlock x:Name="PPTPath" FontSize="10"/>
         </UniformGrid>
         <Image x:Name="QrImg" Grid.Row="1"/>
+        <TextBlock Grid.Row="2" FontSize="8" Margin="10 0">Developed By: 
+            <Hyperlink NavigateUri="http://jenskrumsieck.de" RequestNavigate="Hyperlink_RequestNavigate">Jens Krumsieck</Hyperlink>
+        </TextBlock>
     </Grid>
 </commons:DefaultWindow>

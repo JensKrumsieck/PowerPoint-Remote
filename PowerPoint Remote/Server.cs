@@ -64,6 +64,14 @@ namespace PowerPoint_Remote
                     }
                     catch (COMException) { }
                 }
+                else if (path == "/preview")
+                {
+                    if (Presentation == null) return;
+                    {
+                        res.ContentType = "image/jpeg";
+                        await res.Body.WriteAsync(ScreenCaptureUtil.CaptureSlideShow().ToArray());
+                    }
+                }
             });
         }
 

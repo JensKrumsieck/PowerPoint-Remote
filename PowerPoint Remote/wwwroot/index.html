@@ -29,11 +29,8 @@
 		}
 
 		function preview() {
-			var ts = new Date().getTime();
-			document.body.style.backgroundImage = 'url(preview.jpg?t=' + ts + ')';
-			document.body.style.backgroundRepeat = "no-repeat";
-			document.body.style.backgroundSize = 'contain';
-			document.body.style.backgroundPosition = 'center center';
+			var prev = document.getElementById("preview");
+			prev.src = '/preview?r=' + Math.random()
 		}
 		document.addEventListener('swiped-left', function (e) {
 			nextPage();
@@ -42,10 +39,11 @@
 			previousPage();
 		})
 
-		setInterval(preview, 1000);
+		setInterval(preview, 500);
 
 	</script>
 	<div id="main">
+		<img id="preview" alt="previewImage" />
 		<div id="controls">
 			<button onclick="previousPage();">Previous</button>
 			<button onclick="nextPage();">Next</button>

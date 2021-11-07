@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Drawing;
+using System.IO;
 using System.Runtime.InteropServices;
-using System.Timers;
 
 namespace PowerPoint_Remote
 {
@@ -13,31 +13,39 @@ namespace PowerPoint_Remote
         [DllImport("user32.dll")]
         private static extern bool GetWindowRect(IntPtr handle, ref Rectangle rect);
 
-        public static void CaptureSlideShow(object sender, ElapsedEventArgs e)
+        public static MemoryStream CaptureSlideShow()
         {
             //powerpoints slideshow window
             var hwnd = FindWindowA("screenClass", null);
-            if (hwnd != IntPtr.Zero) CaptureWindow(hwnd);
+            if (hwnd != IntPtr.Zero) return CaptureWindow(hwnd);
+            return new MemoryStream();
         }
 
-        private static void CaptureWindow(IntPtr handle)
+        private static MemoryStream CaptureWindow(IntPtr handle)
         {
-            // Get the size of the window to capture
-            Rectangle rect = new();
+            var rect = new Rectangle();
             GetWindowRect(handle, ref rect);
 
-            // GetWindowRect returns Top/Left and Bottom/Right, so fix it
             rect.Width = rect.Width - rect.X;
             rect.Height = rect.Height - rect.Y;
+            var size = new Size(rect.Width, rect.Height);
 
-            // Create a bitmap to draw the capture into
-            using var bitmap = new Bitmap(rect.Width, rect.Height);
-            // Use PrintWindow to draw the window into our bitmap
-            using (var g = Graphics.FromImage(bitmap))
-            {
-                g.CopyFromScreen(0, 0, 0, 0, new Size(rect.Width, rect.Height));
-            }
-            bitmap.Save($"{AppDomain.CurrentDomain.BaseDirectory}/wwwroot/preview.jpg", System.Drawing.Imaging.ImageFormat.Jpeg);
+            //original and resized img
+            using var srcImage = new Bitmap(size.Width, size.Height);
+            using var srcGraphics = Graphics.FromImage(srcImage);
+            using var dstImage = new Bitmap(size.Width / 2, size.Height / 2);
+            using var dstGraphics = Graphics.FromImage(dstImage);
+
+            var src = new Rectangle(0, 0, size.Width, size.Height);
+            var dst = new Rectangle(0, 0, size.Width / 2, size.Height / 2);
+
+            srcGraphics.CopyFromScreen(0, 0, 0, 0, size);
+            dstGraphics.DrawImage(srcImage, dst, src, GraphicsUnit.Pixel);
+
+            var memoryStream = new MemoryStream();
+            dstImage.Save(memoryStream, System.Drawing.Imaging.ImageFormat.Jpeg);
+
+            return memoryStream;
         }
     }
 }
